@@ -1,0 +1,118 @@
+<form [formGroup]="userMaintenanceForm"  style="padding-right: 5%; padding-left: 5%; ">
+	<div class="card" style="width: 100%;margin-top: 2rem;background-color:#edf2f6;border-radius: 10px; height: 70em; " >
+		<div class="card-header"><b>Mantenimiento de usuario</b></div>
+		<div class="card mb-4 mt-4">
+			<ul class="nav">
+				<button type="button" class="btn-toolbar" (click)="Submit()">
+					<a class="nav-link text-toolbar">
+						<span>
+							<svg width="20" height="17" viewBox="0 0 14 14" fill="none">
+								<path
+									d="M11.6667 1H2.33333C1.59695 1 1 1.59695 1 2.33333V11.6667C1 12.403 1.59695 13 2.33333 13H11.6667C12.403 13 13 12.403 13 11.6667V2.33333C13 1.59695 12.403 1 11.6667 1Z"
+									stroke="#38E8C6"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path d="M1 5H13" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M5 13V5" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</span>
+						Guardar
+					</a>
+				</button>
+				<button type="button" class="btn-toolbar" (click)="cleanUser()">
+					<a class="nav-link text-toolbar">
+						<span>
+							<svg width="20" height="17" viewBox="0 0 14 14" fill="none">
+								<path
+									d="M11.6667 1H2.33333C1.59695 1 1 1.59695 1 2.33333V11.6667C1 12.403 1.59695 13 2.33333 13H11.6667C12.403 13 13 12.403 13 11.6667V2.33333C13 1.59695 12.403 1 11.6667 1Z"
+									stroke="#38E8C6"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path d="M1 5H13" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M5 13V5" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</span>
+						Limpiar
+					</a>
+				</button>
+				<button type="button" class="btn-toolbar">
+					<a class="nav-link text-toolbar" [routerLink]="['/user/card']">
+						<span>
+							<svg width="20" height="17" viewBox="0 0 14 14" fill="none">
+								<path
+									d="M11.6667 1H2.33333C1.59695 1 1 1.59695 1 2.33333V11.6667C1 12.403 1.59695 13 2.33333 13H11.6667C12.403 13 13 12.403 13 11.6667V2.33333C13 1.59695 12.403 1 11.6667 1Z"
+									stroke="#38E8C6"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path d="M1 5H13" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M5 13V5" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</span>
+						Volver
+					</a>
+				</button>
+			</ul>
+		</div>
+		<div class="card-body">
+			<div class="row pb-2 pr-2">
+				<div class="col-lg-2">Tipo de documento</div>
+				<div class="col-lg-4">
+					<ng-select [(ngModel)]="selectedDocumentType" [items]="rowsDocumentType" bindLabel="documentTypeDescription"
+						bindValue="documentTypeId" [ngModelOptions]="{standalone:true}"
+						placeholder="Seleccione" class="ng-select-solid" name="CreditDebitNoteReasonTypeId" required>
+					</ng-select>
+				</div>
+				<div class="col-lg-2">Número de documento</div>
+				<div class="col-lg-4"><input type="text" formControlName="DocumentNumber" class="form-control form-control-sm" [readOnly]="maintenanceCreateOrUpdate == 'Editar'"/></div>
+			</div>
+			<div class="row pb-2">
+				<div class="col-lg-2">Nombre</div>
+				<div class="col-lg-4"><input type="text" formControlName="Name" class="form-control form-control-sm" /></div>
+				<div class="col-lg-2">Apellido Paterno</div>
+				<div class="col-lg-4"><input type="text" formControlName="FathersLastName" class="form-control form-control-sm" /></div>
+			</div>
+			<div class="row pb-2">
+				<div class="col-lg-2">Apellido Materno</div>
+				<div class="col-lg-4"><input type="text" formControlName="MothersLastName" class="form-control form-control-sm" /></div>
+				<div class="col-lg-2">Dirección</div>
+				<div class="col-lg-4"><input type="text" formControlName="Address" class="form-control form-control-sm" /></div>
+			</div>
+			<div class="row pb-2">
+				<div class="col-lg-2">Region</div>
+				<div class="col-lg-4">
+					<ng-select  [(ngModel)]="selectedRegion" [items]="rowsRegion" bindLabel="regionDescription"
+						bindValue="regionCode" [ngModelOptions]="{standalone:true}" (ngModelChange)="ChangeRegion()"
+						placeholder="Seleccione" class="ng-select-solid" name="rowsRegion" required>
+					</ng-select>
+				</div>
+				<div class="col-lg-2">Provincia</div>
+				<div class="col-lg-4">
+					<ng-select [(ngModel)]="selectedProvince" [items]="rowsProvince" bindLabel="provinceDescription"
+						bindValue="provinceCode" [ngModelOptions]="{standalone:true}" (ngModelChange)="ChangeProvince()"
+						placeholder="Seleccione" class="ng-select-solid" name="rowsProvince" required>
+					</ng-select>
+				</div>
+			</div>
+			<div class="row pb-2">
+				<div class="col-lg-2">Ubigeo</div>
+				<div class="col-lg-4">
+					<ng-select [(ngModel)]="selectedUbigeo" [items]="rowsUbigeo" bindLabel="ubigeoDescription"
+						bindValue="ubigeoCode" [ngModelOptions]="{standalone:true}" 
+						placeholder="Seleccione" class="ng-select-solid" name="rowsUbigeo" required>
+					</ng-select>
+				</div>
+				<div class="col-lg-2">Telefono</div>
+				<div class="col-lg-4"><input type="text" formControlName="Phone" class="form-control form-control-sm" /></div>
+			</div>
+			<div class="row pb-2">
+				<div class="col-lg-2">Correo</div>
+				<div class="col-lg-4"><input type="email" formControlName="Email" class="form-control form-control-sm" /></div>
+				<div class="col-lg-2">Contraseña</div>
+				<div class="col-lg-4"><input type="password" formControlName="Password" class="form-control form-control-sm" /></div>
+			</div>
+		</div>
+	</div>	
+</form>

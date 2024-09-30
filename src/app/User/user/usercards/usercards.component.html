@@ -1,0 +1,110 @@
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-right: 5%; padding-left: 5%;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="user/card">
+        <img src="../assets/logo-cem.png" style="width: 150px; height: 60px;" >
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">                  
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" (input)="Find()"  [(ngModel)]="documentNumber" placeholder="Search" [ngModelOptions]="{standalone:true}">
+          <button class="btn btn-outline-success" type="submit" (click)="Find()">Buscar por númer Doc.</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<form  style="padding-right: 5%; padding-left: 5%; ">
+	<div class="card" style="width: 100%;margin-top: 2rem;background-color:#edf2f6;border-radius: 10px; height: 70em; " >
+		<div class="card-header"><b>Lista de usuario</b></div>
+		<div class="card mb-4 mt-4">
+			<ul class="nav">
+				
+				<button type="button" class="btn-toolbar" >
+					<a class="nav-link text-toolbar" [routerLink]="['/user/maintenance']">
+						<!-- <a class="nav-link text-toolbar" [routerLink]="['/user/maintenance']" [queryParams]="{ name: 'John' }"  queryParamsHandling="merge"> -->
+						<span>
+							<svg width="20" height="17" viewBox="0 0 14 14" fill="none">
+								<path
+									d="M11.6667 1H2.33333C1.59695 1 1 1.59695 1 2.33333V11.6667C1 12.403 1.59695 13 2.33333 13H11.6667C12.403 13 13 12.403 13 11.6667V2.33333C13 1.59695 12.403 1 11.6667 1Z"
+									stroke="#38E8C6"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path d="M1 5H13" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M5 13V5" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</span>
+						Registrar
+					</a>
+				</button>
+				<button type="button" class="btn-toolbar" (click)="cleanList()" >
+					<a class="nav-link text-toolbar" >
+						<!-- <a class="nav-link text-toolbar" [routerLink]="['/user/maintenance']" [queryParams]="{ name: 'John' }"  queryParamsHandling="merge"> -->
+						<span>
+							<svg width="20" height="17" viewBox="0 0 14 14" fill="none">
+								<path
+									d="M11.6667 1H2.33333C1.59695 1 1 1.59695 1 2.33333V11.6667C1 12.403 1.59695 13 2.33333 13H11.6667C12.403 13 13 12.403 13 11.6667V2.33333C13 1.59695 12.403 1 11.6667 1Z"
+									stroke="#38E8C6"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path d="M1 5H13" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M5 13V5" stroke="#38E8C6" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</span>
+						Limpiar
+					</a>
+				</button>
+			</ul>
+		</div>
+		<div class="card-body">
+			<div class="container mt-5">
+				<h2>Lista de Usuarios</h2>
+				<table class="table table-striped">
+				  <thead>
+					<tr>
+					  <th>#</th>
+					  <th>Nro. Doc</th>
+					  <th>Nombre</th>
+					  <th>Apellido Paterno</th>
+					  <th>Apellido Materno</th>
+					  <th>Direccion</th>
+					  <!-- <th>Region</th>
+					  <th>Provincia</th> -->
+					  <th>Ubigeo</th>
+					  <th>Celular</th>
+					  <th>Correo</th>
+					  <th>Actions</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr *ngFor="let user of rowsUsers; let i = index">
+					  <td>{{ i + 1 }}</td>
+					  <td>{{ user.documentNumber }}</td>
+					  <td>{{ user.name }}</td>
+					  <td>{{ user.fathersLastName }}</td>
+					  <td>{{ user.mothersLastName }}</td>
+					  <td>{{ user.address }}</td>
+					  <!-- <td>{{ user.regionCode }}</td>
+					  <td>{{ user.provinceCode}}</td> -->
+					  <td>{{ user.ubigeoCode}}</td>
+					  <td>{{ user.phone }}</td>
+					  <td>{{ user.email}}</td>
+					  <td>
+						<div class="d-flex align-items-center">
+							<button class="btn btn-primary btn-sm mr-1" (click)="EditUser(user)">Editar</button>
+							<button class="btn btn-danger btn-sm mr-1" (click)="DeleteUser(user.documentNumber)">Eliminar</button>
+						</div>
+					  </td>
+					</tr>
+				  </tbody>
+				</table>
+			  </div>
+			  
+		</div>
+	</div>	
+</form>
